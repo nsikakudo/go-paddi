@@ -44,7 +44,7 @@ interface NetworkModule {
         @Provides
         @Singleton
         fun provideRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
-            .baseUrl("https://gopaddi-trips.free.beeceptor.com")
+            .baseUrl("https://mypaddi-trips.free.beeceptor.com")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

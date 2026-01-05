@@ -1,5 +1,6 @@
 package com.nig.gopaddi.core.components.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -56,8 +57,10 @@ fun CreateTripBottomSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var isStyleExpanded by remember { mutableStateOf(false) }
 
+    BackHandler(enabled = true) { onDismiss() }
+
     ModalBottomSheet(
-        onDismissRequest = onDismiss,
+        onDismissRequest = {},
         sheetState = sheetState,
         containerColor = Color.White,
         dragHandle = null
@@ -184,6 +187,7 @@ fun CreateTripBottomSheet(
                 text = "Next",
                 onClick = {
                     if (viewModel.tripName.isNotBlank() && viewModel.travelStyle.isNotBlank()) {
+                        viewModel.showCreateTripSheet = false
                         onNextClick()
                     }
                 }

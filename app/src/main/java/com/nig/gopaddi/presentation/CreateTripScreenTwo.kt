@@ -167,7 +167,7 @@ fun TripDetailsScreen(
 
                 Text("Your trip itineraries are placed here", fontSize = 12.sp, fontWeight = FontWeight.W500, color = DarkGrayTextColor)
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(25.dp))
 
                 ItineraryEmptyCard(title = "Flights", icon = R.drawable.ic_activity)
                 Spacer(modifier = Modifier.height(16.dp))

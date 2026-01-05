@@ -248,26 +248,10 @@ fun PlanTripScreen(
         if (viewModel.showCreateTripSheet) {
             CreateTripBottomSheet(
                 viewModel = viewModel,
-                onDismiss = {
-                    viewModel.showCreateTripSheet = false
-                    viewModel.resetInputs()
-                },
-                onNextClick = {
-                    viewModel.performCreateTrip {
-                        onNextClick()
-                    }
-                }
+                onDismiss = { viewModel.showCreateTripSheet = false },
+                onNextClick = { viewModel.performCreateTrip { onNextClick() } }
             )
         }
-
-
-//        if (viewModel.showCreateTripSheet) {
-//            CreateTripBottomSheet(
-//                viewModel = viewModel,
-//                onDismiss = { viewModel.showCreateTripSheet = false },
-//                onNextClick = { viewModel.performCreateTrip { onNextClick() } }
-//            )
-//        }
 
         if (viewModel.createTripState is Resource.Loading) ShowProgressLoader()
     }

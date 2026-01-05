@@ -9,9 +9,7 @@ import com.nig.gopaddi.core.util.Resource
 import com.nig.gopaddi.data.remote.RemoteDestination
 import com.nig.gopaddi.data.remote.Trip
 import com.nig.gopaddi.domain.CityResultUI
-import com.nig.gopaddi.domain.usecase.CreateTripUseCase
-import com.nig.gopaddi.domain.usecase.GetAllTripsUseCase
-import com.nig.gopaddi.domain.usecase.GetDestinationsUseCase
+import com.nig.gopaddi.domain.usecase.TripUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -23,9 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TripViewModel @Inject constructor(
-    private val createTripUseCase: CreateTripUseCase,
-    private val getAllTripsUseCase: GetAllTripsUseCase,
-    private val getDestinationsUseCase: GetDestinationsUseCase
+    private val tripUseCase: TripUseCase,
 ) : ViewModel() {
 
     var selectedCity by mutableStateOf<CityResultUI?>(null)
@@ -59,7 +55,7 @@ class TripViewModel @Inject constructor(
 
     fun fetchUserTrips() {
         viewModelScope.launch {
-            getAllTripsUseCase().collect { tripsState = it }
+            tripUseCase.getAllTrips().collect { tripsState = it }
         }
     }
 
@@ -77,7 +73,7 @@ class TripViewModel @Inject constructor(
         )
 
         viewModelScope.launch {
-            createTripUseCase(newTrip).collect { result ->
+            tripUseCase.createTrip(newTrip).collect { result ->
                 createTripState = result
 
                 if (result is Resource.Success) {
@@ -99,40 +95,6 @@ class TripViewModel @Inject constructor(
         travelStyle = ""
         tripDescription = ""
     }
-//    fun resetInputs() {
-//        selectedCity = null
-//        startDateMillis = null
-//        endDateMillis = null
-//        tripName = ""
-//        travelStyle = ""
-//        tripDescription = ""
-//        createTripState = null
-//    }
-//
-//    fun performCreateTrip(onSuccess: () -> Unit) {
-//        val trip = Trip(
-//            title = tripName,
-//            destination = selectedCity?.name ?: "Unknown",
-//            travelStyle = travelStyle,
-//            description = tripDescription,
-//            startDate = formatDate(startDateMillis),
-//            endDate = formatDate(endDateMillis),
-//            duration = getTripDuration(),
-//            imageUrl = "https://picsum.photos/seed/${tripName}/400/300"
-//        )
-//
-//        viewModelScope.launch {
-//            createTripUseCase(trip).collect { result ->
-//                createTripState = result
-//                if (result is Resource.Success) {
-//                    resetInputs()
-//                    onSuccess()
-//                    showCreateTripSheet = false
-//                }
-//            }
-//        }
-//    }
-
 
     val filteredUserTrips: List<Trip>
         get() {
@@ -166,7 +128,7 @@ class TripViewModel @Inject constructor(
 
     fun fetchDestinations() {
         viewModelScope.launch {
-            getDestinationsUseCase().collect { destinationsState = it }
+            tripUseCase.getDestinations().collect { destinationsState = it }
         }
     }
 
