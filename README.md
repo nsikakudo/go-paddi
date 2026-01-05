@@ -59,3 +59,68 @@ Follow these steps to run the application on your local machine.
 
 A custom safeApiCall utility catches IOException (network) and HttpException (server) errors, converting them into user-friendly "Gopaddi" branded messages like: "An unexpected hitch occurred: Expected BEGIN_ARRAY..."
 
+
+
+## API Documentation
+
+The project communicates with a mock API hosted on Beeceptor.
+
+Base URL: https://mypaddi-trips.free.beeceptor.com
+
+**Endpoints**:
+
+1. **Get All Trips**
+
+Endpoint: /all-trips
+
+Method: GET
+
+Usage: Used to get the user's trip list.
+
+Response Payload:
+
+[
+  {
+    "id": "1",
+    "title": "Summer in Paris",
+    "destination": "Paris, France",
+    "travelStyle": "Couple",
+    "description": "A romantic getaway",
+    "startDate": "Mon Jan 05 2026 10:00:00 GMT+0000",
+    "endDate": "Mon Jan 12 2026 10:00:00 GMT+0000",
+    "imageUrl": "https://picsum.photos/id/10/400/300"
+  }
+]
+
+
+2. **Get Destinations**
+
+Endpoint: /api/destinations
+
+Method: GET
+
+Usage: Populates the CitySelectionScreen.
+
+Response Payload:
+
+{
+  "destinations": [
+    {
+      "countryName": "Nigeria",
+      "cityName": "Lagos",
+      "airportName": "Murtala Muhammed International",
+      "countryFlag": "https://url-to-flag.png",
+      "countryCode": "NG"
+    }
+  ]
+}
+
+
+3. **Create Trip**
+
+Endpoint: /create-trip
+
+Method: POST
+
+Usage: Syncs a newly created trip to the server after it has been saved to the local Room database.
+
