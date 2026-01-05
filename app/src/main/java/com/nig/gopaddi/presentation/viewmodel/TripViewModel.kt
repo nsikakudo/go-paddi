@@ -1,4 +1,4 @@
-package com.nig.gopaddi.presentation
+package com.nig.gopaddi.presentation.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

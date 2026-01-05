@@ -38,8 +38,8 @@ fun TripFilterDropdown(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color(0xFFF7F9FC), RoundedCornerShape(8.dp))
-            .border(1.dp, Color(0xFFEAEAEA), RoundedCornerShape(8.dp))
+            .background(Color(0xFFFFFFFF), RoundedCornerShape(4.dp))
+            .border(8.dp, Color(0xFFF0F2F5), RoundedCornerShape(4.dp))
             .clickable { expanded = true }
             .padding(16.dp)
     ) {

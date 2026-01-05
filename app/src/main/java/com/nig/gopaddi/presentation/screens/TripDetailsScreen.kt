@@ -1,4 +1,4 @@
-package com.nig.gopaddi.presentation
+package com.nig.gopaddi.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -40,8 +40,10 @@ import com.nig.gopaddi.core.components.ui.ActionButton
 import com.nig.gopaddi.core.components.ui.ItineraryEmptyCard
 import com.nig.gopaddi.core.components.ui.PlanningBucket
 import com.nig.gopaddi.core.util.TripDateParser
+import com.nig.gopaddi.presentation.viewmodel.TripViewModel
 import com.nig.gopaddi.ui.theme.BackgroundColor
 import com.nig.gopaddi.ui.theme.BlackColor
+import com.nig.gopaddi.ui.theme.BorderLightGrayBgColor
 import com.nig.gopaddi.ui.theme.CyanGrayBgColor
 import com.nig.gopaddi.ui.theme.DarkGrayTextColor
 import com.nig.gopaddi.ui.theme.DeepBlueColor
@@ -169,13 +171,30 @@ fun TripDetailsScreen(
 
                 Spacer(modifier = Modifier.height(25.dp))
 
-                ItineraryEmptyCard(title = "Flights", icon = R.drawable.ic_activity)
-                Spacer(modifier = Modifier.height(16.dp))
+                ItineraryEmptyCard(
+                    title = "Flights",
+                    headerIcon = R.drawable.ic_flights_illustrator,
+                    illustration = R.drawable.ic_activity,
+                    containerColor = BorderLightGrayBgColor,
+                    contentTextColor = PrimaryTextColor,
+                    contentColor = PrimaryTextColor
+                )
 
-                ItineraryEmptyCard(title = "Hotels", icon = R.drawable.ic_hotel)
-                Spacer(modifier = Modifier.height(16.dp))
+                ItineraryEmptyCard(
+                    title = "Hotels",
+                    headerIcon = R.drawable.ic_hotel_illustrator,
+                    illustration = R.drawable.ic_hotel,
+                    containerColor = Color(0xFF344054),
+                    contentTextColor = BackgroundColor,
+                )
 
-                ItineraryEmptyCard(title = "Activities", icon = R.drawable.ic_flight)
+                ItineraryEmptyCard(
+                    title = "Activities",
+                    headerIcon = R.drawable.ic_activities_illustrator,
+                    illustration = R.drawable.ic_flight,
+                    containerColor = LightBlueColor,
+                    contentTextColor = BackgroundColor,
+                )
             }
         }
     }

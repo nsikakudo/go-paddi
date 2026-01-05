@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.compose.rememberNavController
-import com.nig.gopaddi.presentation.TripNavigationGraph
+import com.nig.gopaddi.presentation.navigation.TripNavigationGraph
 import android.graphics.Color
 import com.nig.gopaddi.ui.theme.GopaddiTheme
 import dagger.hilt.android.AndroidEntryPoint

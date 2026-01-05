@@ -41,7 +41,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nig.gopaddi.R
-import com.nig.gopaddi.presentation.TripViewModel
+import com.nig.gopaddi.presentation.viewmodel.TripViewModel
 import com.nig.gopaddi.ui.theme.BlackColor
 import com.nig.gopaddi.ui.theme.GrayTextColor
 import com.nig.gopaddi.ui.theme.LightCyanGrayBgColor

@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nig.gopaddi.presentation.TripViewModel
+import com.nig.gopaddi.presentation.viewmodel.TripViewModel
 import com.nig.gopaddi.ui.theme.BackgroundColor
 import com.nig.gopaddi.ui.theme.LightBlueColor
 import com.nig.gopaddi.ui.theme.PrimaryTextColor

@@ -1,4 +1,4 @@
-package com.nig.gopaddi.presentation
+package com.nig.gopaddi.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -44,6 +44,7 @@ import com.nig.gopaddi.R
 import com.nig.gopaddi.core.util.Resource
 import com.nig.gopaddi.data.remote.RemoteDestination
 import com.nig.gopaddi.domain.CityResultUI
+import com.nig.gopaddi.presentation.viewmodel.TripViewModel
 import com.nig.gopaddi.ui.theme.BackgroundColor
 import com.nig.gopaddi.ui.theme.CardBgBorderColor
 import com.nig.gopaddi.ui.theme.DarkGrayTextColor
@@ -117,7 +118,6 @@ fun CitySelectionScreen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // --- Remote Data Handling ---
             when (val state = viewModel.destinationsState) {
                 is Resource.Loading -> {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -171,14 +171,13 @@ fun CitySelectionScreen(
                                 DestinationResultItem(
                                     destination = destination,
                                     onClick = {
-                                        // Mapping remote data back to the UI selection
                                         viewModel.selectedCity = CityResultUI(
                                             name = "${destination.cityName}, ${destination.countryName}",
                                             airport = destination.airportName,
                                             countryCode = destination.countryCode,
                                             flagUrl = destination.countryFlag,
                                         )
-                                        viewModel.searchQuery = "" // Clear search on select
+                                        viewModel.searchQuery = ""
                                         onClose()
                                     }
                                 )
@@ -203,7 +202,6 @@ fun DestinationResultItem(
             .padding(vertical = 16.dp, horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Mappin Icon
         Icon(
             painter = painterResource(id = R.drawable.ic_filled_mappin),
             contentDescription = null,
@@ -216,13 +214,13 @@ fun DestinationResultItem(
             Text(
                 text = "${destination.cityName}, ${destination.countryName}",
                 fontSize = 16.sp,
-                fontWeight = FontWeight.W700, // Satoshi Bold
+                fontWeight = FontWeight.W700,
                 color = PrimaryTextColor,
             )
             Text(
                 text = destination.airportName,
                 fontSize = 14.sp,
-                fontWeight = FontWeight.W400, // Satoshi Regular
+                fontWeight = FontWeight.W400,
                 color = DarkGrayTextColor,
             )
         }
@@ -235,8 +233,8 @@ fun DestinationResultItem(
                     .size(24.dp, 18.dp)
                     .clip(RoundedCornerShape(2.dp)),
                 contentScale = ContentScale.FillBounds,
-                placeholder = painterResource(id = R.drawable.ic_trip), // Fallback
-                error = painterResource(id = R.drawable.ic_trip) // Fallback
+                placeholder = painterResource(id = R.drawable.ic_trip),
+                error = painterResource(id = R.drawable.ic_trip)
             )
             Text(
                 text = destination.countryCode,
@@ -247,220 +245,3 @@ fun DestinationResultItem(
         }
     }
 }
-
-
-//@Composable
-//fun DestinationResultItem(
-//    destination: Trip,
-//    onClick: () -> Unit
-//) {
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .clickable(onClick = onClick)
-//            .padding(vertical = 16.dp, horizontal = 20.dp),
-//        verticalAlignment = Alignment.CenterVertically
-//    ) {
-//        Icon(
-//            painter = painterResource(id = R.drawable.ic_filled_mappin),
-//            contentDescription = null,
-//            modifier = Modifier.size(22.dp),
-//            tint = LightBlueColor
-//        )
-//
-//        Spacer(modifier = Modifier.width(12.dp))
-//
-//        Column(modifier = Modifier.weight(1f)) {
-//            Text(
-//                text = destination.destination,
-//                fontSize = 16.sp,
-//                fontWeight = FontWeight.W700,
-//                color = PrimaryTextColor,
-//            )
-//            Text(
-//                text = destination.title,
-//                fontSize = 14.sp,
-//                fontWeight = FontWeight.W400,
-//                color = DarkGrayTextColor,
-//            )
-//        }
-//
-////        // Optionally show the travel style as a badge
-////        Surface(
-////            color = CyanGrayBgColor,
-////            shape = RoundedCornerShape(4.dp)
-////        ) {
-////            Text(
-////                text = destination.travelStyle,
-////                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
-////                fontSize = 10.sp,
-////                fontWeight = FontWeight.W700,
-////                color = LightBlueColor
-////            )
-////        }
-//    }
-//}
-
-
-
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Composable
-//fun CitySelectionScreen(
-//    viewModel: TripViewModel,
-//    onClose: () -> Unit,
-//) {
-//
-//    Scaffold(
-//        topBar = {
-//            Column {
-//                Row(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(horizontal = 16.dp, vertical = 12.dp),
-//                    verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    IconButton(onClick = onClose) {
-//                        Icon(Icons.Default.Close, contentDescription = "Close")
-//                    }
-//                    Text(
-//                        text = "Where",
-//                        fontSize = 18.sp,
-//                        fontWeight = FontWeight.Bold,
-//                        modifier = Modifier.padding(start = 8.dp)
-//                    )
-//                }
-//                HorizontalDivider(thickness = 0.5.dp, color = Color.LightGray)
-//            }
-//        }
-//    ) { padding ->
-//        Column(
-//            modifier = Modifier
-//                .padding(padding)
-//                .fillMaxSize()
-//                .background(Color.White)
-//        ) {
-//            Spacer(modifier = Modifier.height(20.dp))
-//
-//            Text(
-//                text = "Please select a city",
-//                fontSize = 14.sp,
-//                fontWeight = FontWeight.W500,
-//                color = GrayTextColor,
-//                modifier = Modifier.padding(horizontal = 20.dp)
-//            )
-//
-//            Spacer(modifier = Modifier.height(12.dp))
-//
-//            OutlinedTextField(
-//                value = viewModel.searchQuery,
-//                onValueChange = { viewModel.searchQuery = it },
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 16.dp),
-//                shape = RoundedCornerShape(8.dp),
-//                placeholder = { Text("Search for a city...") },
-////                colors = TextFieldDefaults.colors(
-////                    focusedBorderColor = Color(0xFF0D6EFD), // The blue from your image
-////                    unfocusedBorderColor = Color(0xFF0D6EFD),
-////                    cursorColor = Color.Black
-////                ),
-//                textStyle = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.W500, color = PrimaryTextColor)
-//            )
-//
-//            Spacer(modifier = Modifier.height(10.dp))
-//
-//            val results = viewModel.filteredCities
-//
-//            if (results.isEmpty()) {
-//                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-//                    Text(
-//                        text = "The search word \"${viewModel.searchQuery}\" does not exist.",
-//                        color = Color.Gray,
-//                        textAlign = TextAlign.Center,
-//                        modifier = Modifier.padding(20.dp)
-//                    )
-//                }
-//            } else {
-//                LazyColumn {
-//                    items(results) { city ->
-//                        CityResultItem(
-//                            city = city,
-//                            onClick = {
-//                                viewModel.selectedCity = city
-//                                viewModel.searchQuery = ""
-//                                onClose()
-//                            }
-//                        )
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//
-//
-//@Composable
-//fun CityResultItem(
-//    city: CityResult,
-//    onClick: () -> Unit
-//) {
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .clickable(onClick = onClick)
-//            .padding(vertical = 16.dp, horizontal = 20.dp),
-//        verticalAlignment = Alignment.CenterVertically
-//    ) {
-//        Icon(
-//            painter = painterResource(id = R.drawable.ic_filled_mappin),
-//            contentDescription = null,
-//            modifier = Modifier.size(22.dp)
-//        )
-//
-//        Spacer(modifier = Modifier.width(12.dp))
-//
-//        Column(modifier = Modifier.weight(1f)) {
-//            Text(
-//                text = city.name,
-//                fontSize = 16.sp,
-//                fontWeight = FontWeight.W900,
-//                color = PrimaryTextColor
-//            )
-//            Text(
-//                text = city.airport,
-//                fontSize = 14.sp,
-//                fontWeight = FontWeight.W500,
-//                color = DarkGrayTextColor
-//            )
-//        }
-//
-//        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-//            AsyncImage(
-//                model = city.flagUrl,
-//                contentDescription = null,
-//                modifier = Modifier.size(24.dp, 16.dp),
-//                contentScale = ContentScale.FillBounds
-//            )
-//            Text(
-//                text = city.countryCode,
-//                fontSize = 14.sp,
-//                color = DarkGrayTextColor,
-//                fontWeight = FontWeight.W500
-//            )
-//        }
-//    }
-//}
-
-
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview3() {
-//    GopaddiTheme {
-//        CitySelectionScreen(
-//            onClose = {},
-//            viewModel = TripViewModel
-//        )
-//    }
-//}

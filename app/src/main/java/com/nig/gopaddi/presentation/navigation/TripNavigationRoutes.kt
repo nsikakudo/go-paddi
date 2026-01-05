@@ -1,4 +1,4 @@
-package com.nig.gopaddi.presentation
+package com.nig.gopaddi.presentation.navigation
 
 sealed class TripNavigationRoutes(val route: String) {
     data object PlanTrip : TripNavigationRoutes("plan_trip")

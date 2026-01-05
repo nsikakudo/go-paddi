@@ -1,4 +1,4 @@
-package com.nig.gopaddi.presentation
+package com.nig.gopaddi.presentation.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -47,6 +47,7 @@ import com.nig.gopaddi.core.components.ui.ShowProgressLoader
 import com.nig.gopaddi.core.components.ui.TripFilterDropdown
 import com.nig.gopaddi.core.components.ui.TripItemCard
 import com.nig.gopaddi.core.util.Resource
+import com.nig.gopaddi.presentation.viewmodel.TripViewModel
 import com.nig.gopaddi.ui.theme.BackgroundColor
 import com.nig.gopaddi.ui.theme.DarkGrayTextColor
 import com.nig.gopaddi.ui.theme.GrayTextColor

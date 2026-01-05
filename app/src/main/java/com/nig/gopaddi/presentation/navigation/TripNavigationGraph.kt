@@ -1,4 +1,4 @@
-package com.nig.gopaddi.presentation
+package com.nig.gopaddi.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -9,6 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.nig.gopaddi.core.components.ui.DateSelectionScreen
+import com.nig.gopaddi.presentation.screens.CitySelectionScreen
+import com.nig.gopaddi.presentation.screens.PlanTripScreen
+import com.nig.gopaddi.presentation.screens.TripDetailsScreen
+import com.nig.gopaddi.presentation.viewmodel.TripViewModel
 
 @Composable
 fun TripNavigationGraph(

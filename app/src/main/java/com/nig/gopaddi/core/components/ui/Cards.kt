@@ -12,11 +12,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -132,23 +134,78 @@ fun PlanningBucket(
 }
 
 
-
 @Composable
-fun ItineraryEmptyCard(title: String, icon: Int) {
+fun ItineraryEmptyCard(
+    title: String,
+    headerIcon: Int,
+    illustration: Int,
+    containerColor: Color,
+    contentTextColor: Color,
+    contentColor: Color = Color.White,
+    onButtonClick: () -> Unit = {}
+) {
     Card(
-        modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        border = BorderStroke(1.dp, Color(0xFFEAEAEA))
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = containerColor),
+        shape = RoundedCornerShape(4.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(24.dp).fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(painterResource(icon), null, modifier = Modifier.size(150.dp))
-            Spacer(Modifier.height(8.dp))
-            Text("No $title yet", fontWeight = FontWeight.W700, fontSize = 16.sp, color = PrimaryTextColor)
-            Spacer(Modifier.height(12.dp))
-            GoPaddiBlueButton(text = "Add $title", onClick = {}, modifier = Modifier.padding(horizontal = 49.dp))
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 12.dp, start = 4.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = headerIcon),
+                    contentDescription = null,
+                    tint = contentColor,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = title,
+                    color = contentTextColor,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.W700
+                )
+            }
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = Color.White),
+                shape = RoundedCornerShape(4.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 32.dp, horizontal = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(id = illustration),
+                        contentDescription = null,
+                        modifier = Modifier.size(120.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = "No request yet",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = Color.Black
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    GoPaddiBlueButton(
+                        text = "Add ${if (title == "Activities") "Flight" else title.dropLast(1)}",
+                        onClick = onButtonClick,
+                        modifier = Modifier.fillMaxWidth(0.7f)
+                    )
+                }
+            }
         }
     }
 }
